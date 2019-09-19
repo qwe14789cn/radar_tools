@@ -18,7 +18,7 @@ function gbest = PSO(func,Particle,limit,vlim,err)
 
 N = Particle;                                                               %粒子个数
 iter = 300;                                                                 %迭代次数
-w = 1;                                                                    %惯性权重
+w = 1;                                                                      %惯性权重
 c1 = 0.8;                                                                   %自我学习权重
 c2 = 0.3;                                                                   %群体学习权重
 d = size(limit,1);
