@@ -5,7 +5,6 @@ udpRx.ReceiveBufferSize = 65536;
 udpRx.MaximumMessageLength = package_size(1);
 TOTAL = package_size(2);
 Received = uint8(zeros(package_size(1),package_size(2)));
-disp('waiting...')
 while TOTAL
     Rx = udpRx();
     if ~isempty(Rx)
@@ -13,5 +12,3 @@ while TOTAL
         TOTAL = TOTAL - 1;
     end
 end
-disp('finished')
-Received = double(Received);
