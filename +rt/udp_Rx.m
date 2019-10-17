@@ -12,3 +12,4 @@ while TOTAL
         TOTAL = TOTAL - 1;
     end
 end
+release(udpRx);
