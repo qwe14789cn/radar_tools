@@ -3,100 +3,49 @@
 %   author:qwe14789cn@gmail.com
 %   https://github.com/qwe14789cn/radar_tools
 %--------------------------------------------------------------------------
-%   rt.ad_analyzer(sig,bw_range,fs,sep_N,AD_len,flag)
+%   ad_analyzer(sig,fin,fs)
 %--------------------------------------------------------------------------
 %   Description:
 %   Analysis the input signal about the Spectrum and phase angle
 %--------------------------------------------------------------------------
 %   input:
-%           sig         ÊäÈëĞÅºÅ
-%           bw_range    ·ÖÎö´ø¿í
-%           fs          ²ÉÑùËÙÂÊ
-%           sep_N       ĞÅºÅ¸ôÀëµãÊı
-%           AD_len      ADÎ»Êı
-%           flag        ±¥ºÍ ·Ç±¥ºÍ±ê¼ÇÎ» Ä¬ÈÏÎª0 ·Ç±¥ºÍ  1 ±¥ºÍ
-%	output£º
-%           ENOB        ÓĞĞ§Î»
+%           sig         è¾“å…¥ä¿¡å·
+%           fin         æµ‹è¯•ä¿¡å·é¢‘ç‡
+%           fs          é‡‡æ ·é€Ÿç‡
+%	outputï¼š
+%           ENOB        æœ‰æ•ˆä½
 %--------------------------------------------------------------------------
 %   Examples:
-%   rt.ad_analyzer(sig,[8.5e6 11.5e6],fs,70,14)
-%   rt.ad_analyzer(sig,[8.5e6 11.5e6],fs,70,14,1)
+%   ad_analyzer(sig,50e6,250e6)
 %--------------------------------------------------------------------------
-function ad_analyzer(sig,bw_range,fs,sep_N,AD_len,flag)
-if nargin <=5
-    flag = 1;
+function ad_analyzer(sig,fin,fs)
+N = length(sig);
+if mod(fin./fs*N,1)~=0
+    Nfft = floor(fin./fs*N)*fs./fin;
+    disp("Fin/Fs*ä¿¡å·ç‚¹æ•°ä¸ä¸ºæ•´æ•°ï¼Œä¼šäº§ç”Ÿé¢‘è°±æ³„æ¼");
+    disp(['ä¿¡å·é•¿åº¦ç”± ' num2str(N) ' ä¿®æ”¹ä¸º ' num2str(Nfft) 'å¹¶åš ' num2str(Nfft) ' ç‚¹FFT']);
+else
+    Nfft = N;
 end
-disp('------------------------------------------------------------')
-disp('×¢Òâ£ºAD²âÊÔĞëÂú×ãÒÔÏÂ¹«Ê½²»»á·¢ÉúÆµÆ×Ğ¹Â¶')
-disp('M/N=Fin/Fs')
-disp('MÎªÊ±ÓòµÄÖÜÆÚÊı£¬NÎª²ÉµãÊı£¬FsÎª²ÉÑùÆµÂÊ£¬FinÎªĞÅºÅÆµÂÊ')
-disp('------------------------------------------------------------')
-disp('1.Èç¹ûÊäÈëĞÅºÅĞÅÔë±È ±¥ºÍ = 1.76+6.02*ADÎ»Êı');
-disp('Çë½«×îºóÒ»ÏîÉèÖÃÎª1')
-disp('rt.ad_analyzer(sig,[0 fs/2],fs,sep_N,AD_len,1)')
-disp('------------------------------------------------------------')
-disp('2.Èç¹ûÊäÈëĞÅºÅĞÅÔë±È ²»±¥ºÍ <= 1.76+6.02*ADÎ»Êı');
-disp('Çë½«×îºóÒ»ÏîÉèÖÃÎª0 »òÕß²»ÉèÖÃ')
-disp('rt.ad_analyzer(sig,[0 fs/2],fs,sep_N,AD_len)')
-disp('------------------------------------------------------------')
-disp('3.Èç¹ûÊäÈëĞÅºÅĞÅÔë±ÈÊÇÔÚÒ»¶¨´ø¿í¼ÆËãµÃµ½');
-disp('Çë½«×îºóÒ»ÏîÉèÖÃÎª1,²¢Éè¶¨´ø¿í·¶Î§')
-disp('rt.ad_analyzer(sig,[8e6 12e6],fs,sep_N,AD_len,1)')
-disp('------------------------------------------------------------')
-disp('Êı¾İ·ÖÎö');
-disp('------------------------------------------------------------')
-Nfft = 2^nextpow2(length(sig));                                             %×Ô¶¯¼ÆËãfftµãÊı
-x = 0:fs/Nfft:fs/2 - fs/Nfft;                                               %ÆµÂÊºá×ø±ê
-f = fft(sig,Nfft);
-f = f(1:Nfft/2);
+
+x = 0:fs/Nfft:fs/2 - fs/Nfft;                                               %é¢‘ç‡æ¨ªåæ ‡
+f = fft(sig,Nfft);f = f(1:Nfft/2);
 a = abs(f);
-p = a.^2;
-db = pow2db(p);
-db = db - max(db(:));
-%--------------------------------------------------------------------------
-%   ÄÃµ½×î¸ßÆµÂÊµã
-%--------------------------------------------------------------------------
-loc = find(p==max(p));
-p_max = p(loc);
-N_range = [ceil(min(bw_range)/fs*Nfft+0.1):(loc-sep_N) ...
-           (loc+sep_N):floor(max(bw_range)/fs*Nfft)];                       %·ÖÎöµãÊı·¶Î§
-SNR = pow2db(p_max./sum(p(N_range)));
-if flag ==0
-    ENOB = (SNR - 1.76 - 20*log10(max(sig(:))./2^(AD_len-1)))/6.02;
-end
-if flag ==1
-    ENOB = (SNR - 1.76)/6.02;
-end
+power = a.^2;                                                               %åŠŸç‡
+power_db = pow2db(power);
+power_db = power_db - max(power_db(:));                                     %dB
 
-fprintf('·ÖÎöÆµÂÊ·¶Î§ %1.2fMhz ~ %1.2fMhz\n',bw_range/1e6);
-fprintf('ĞÅºÅ×óÓÒ¸ôÀëµãÊı %d\n',sep_N);
-fprintf('ĞÅÔë±ÈSNR = %1.2f dB,',SNR);
-if flag ==0
-    fprintf('·Ç±¥ºÍ×´Ì¬²¹³¥ENOB = %1.2f\n',ENOB);
-elseif flag==1
-    fprintf('±¥ºÍ×´Ì¬¼ÆËãENOB = %1.2f\n',ENOB);
-end
-fprintf('ADÎ»ÊıÎª %d Î»,ÀíÂÛ¶¯Ì¬·¶Î§Ó¦Îª %1.2f dB\n',[AD_len 2*pow2db(2^AD_len)]);
+fin_loc = fin./(fs/2)*(Nfft/2)*(0:floor(fs/2/fin))+1;                       %è¾“å…¥ä¿¡å·é¢‘ç‚¹
+fin_loc(fin_loc>Nfft/2) = [];                                               %å»æ‰é¢‘ç‡èŒƒå›´å¤–é¢çš„ç‚¹
 
+all_power = sum(power);
+sig_power = power(fin_loc(1));
+noise_power = all_power - sum(power(fin_loc));
+snr = sig_power ./noise_power;
+snr_db = pow2db(snr);
+ENOB = (snr_db - 1.76)/6.02;
 
-%--------------------------------------------------------------------------
-%   ÆµÂÊ·Ö²¼
-%--------------------------------------------------------------------------
-%   ×ø±êĞŞÕı
-%--------------------------------------------------------------------------
-if fs/1e6 > 1 && fs/1e9 < 1
-    x = x/1e6;
-    type = 1;
-end
-if fs/1e3 > 1 && fs/1e6 < 1
-    x = x/1e3;
-    type = 2;
-end
-plot(x,db,x(N_range),db(N_range));legend('ĞÅºÅÆµÆ×','·ÖÎöÇø¼ä');
-if type==1
-    xlabel('ÆµÂÊ MHz')
-end
-if type==2
-    xlabel('ÆµÂÊ KHz')
-end
-ylabel('dB')
+figure(1)
+plot(x,power_db,x(fin_loc(2)),power_db(fin_loc(2)),'d')
+fprintf('ä¿¡å™ªæ¯”SNR = %1.2f dB,',snr_db);
+fprintf('ENOB = %1.2f\n',ENOB);
