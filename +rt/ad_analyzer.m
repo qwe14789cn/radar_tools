@@ -27,6 +27,13 @@ if mod(fin./fs*N,1)~=0
 else
     Nfft = N;
 end
+if fin>=1e6
+    disp("选择坐标Mhz")
+    f_x = "MHz";
+elseif fin>=1e3
+    disp("选择坐标KHz")
+    f_x = "KHz";
+end
 
 x = 0:fs/Nfft:fs/2 - fs/Nfft;                                               %频率横坐标
 f = fft(sig,Nfft);f = f(1:Nfft/2);
@@ -46,6 +53,18 @@ snr_db = pow2db(snr);
 ENOB = (snr_db - 1.76)/6.02;
 
 figure(1)
-plot(x,power_db,x(fin_loc(2)),power_db(fin_loc(2)),'d')
+if f_x =="KHz"
+    x = x./1e3;
+elseif f_x =="MHz"
+    x = x./1e6;
+end
+plot(x,power_db,x(fin_loc(2)),power_db(fin_loc(2)),'o')
+text(x(fin_loc(2)),power_db(fin_loc(2)),...
+    {['Fin = ' num2str(fin./1e6) ' MHz'],['SNR = ' num2str(snr_db) 'dB']})
+grid on;
+xlabel(f_x);ylabel("dB")
 fprintf('信噪比SNR = %1.2f dB,',snr_db);
 fprintf('ENOB = %1.2f\n',ENOB);
+
+
+
