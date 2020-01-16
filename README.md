@@ -19,7 +19,7 @@ write_data      将数据保存为文档输出
 data_reshape    数据形态切割
 
 auto_scale      按照AD位数缩放数据
-    
+
 波形生成工具
 --------------------------------
 exp_wave        点频信号生成工具(复信号)
@@ -56,8 +56,11 @@ radar_eq        雷达方程(测试)
 
 write_data      数据保存txt工具
 
+dbm2vpp         dbm转Vpp
 
-radar_sim包含雷达信号仿真模板 
+vpp2dbm         Vpp转dbm
+
+radar_sim包含雷达信号仿真模板
 =================================
 版本要求MATLAB 2017a 及其以上 包括
 
