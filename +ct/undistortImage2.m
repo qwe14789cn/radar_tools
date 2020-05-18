@@ -17,7 +17,7 @@ fy = K(2,2);                                                                %ÄÚ²
 cx = K(1,3);                                                                %x·½ÏòÏñËØÆ«ÒÆ²¹³¥
 cy = K(2,3);                                                                %y·½ÏòÏñËØÆ«ÒÆ²¹³¥
 
-undistorted_img = zeros(size(img));                                         %½ÃÕýºó»º³åÊý¾Ý
+undistorted_img = eval([data_type '(zeros(size(img)))']);                   %½ÃÕýºó»º³åÊý¾Ý
 pixel_trans_u = zeros(height,width);
 pixel_trans_v = zeros(height,width);
 %--------------------------------------------------------------------------
