@@ -9,9 +9,9 @@
 %   [uimxy,u,v] = undistortImage2(imxy,cameraParams.IntrinsicMatrix.',cameraParams.RadialDistortion);
 %--------------------------------------------------------------------------
 function [undistorted_img,...
-          pixel_trans_u,...
-          pixel_trans_v] = undistortImage2(img, K, D)
- [height, width,~] = size(img);                                               %»ñÈ¡Í¼Æ¬³ß´ç
+        pixel_trans_u,...
+        pixel_trans_v] = undistortImage2(img, K, D)
+[height, width,~] = size(img);                                               %»ñÈ¡Í¼Æ¬³ß´ç
 fx = K(1,1);                                                                %ÄÚ²Î¾ØÕó x·½Ïò±ÈÀýÒò×Ó
 fy = K(2,2);                                                                %ÄÚ²Î¾ØÕó y·½Ïò±ÈÀýÒò×Ó
 cx = K(1,3);                                                                %x·½ÏòÏñËØÆ«ÒÆ²¹³¥
@@ -49,7 +49,7 @@ v_distorted = fy.*Y2 + cy;                                                  %Í¼Ï
 %--------------------------------------------------------------------------
 %   Ë®Æ½·½Ïò
 %--------------------------------------------------------------------------
-u_distorted(u_distorted<1)=nan;                                     
+u_distorted(u_distorted<1)=nan;
 u_distorted(u_distorted>width)=nan;
 
 %--------------------------------------------------------------------------
