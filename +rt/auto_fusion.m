@@ -16,11 +16,7 @@
 %   output:
 %           output              weight point matrix
 %--------------------------------------------------------------------------
-%   Examples:   
-%   a = [1+2j,3+4j];
-%   rt.abs2db(a)
-%   ans =
-%   -6.9897         0
+%   Examples:
 %--------------------------------------------------------------------------
 function [output] = auto_fusion(input_data,conn)
 CC = bwconncomp(input_data,conn);
@@ -29,4 +25,5 @@ output = zeros(N,2);
 S = regionprops(CC,'Centroid');
 for idx = 1:N
     output(idx,:) = S(idx).Centroid;
+end
 end

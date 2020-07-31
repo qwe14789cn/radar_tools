@@ -14,7 +14,7 @@
 %   output:
 %           dataout                 output data
 %--------------------------------------------------------------------------
-%   Examples:   
+%   Examples:
 %   rt.b2d('1101',5)
 %   ans =
 %      13
@@ -22,9 +22,4 @@
 function [dataout] = b2d(datain,N_bit)
 dataout = bin2dec(datain);
 dataout(dataout>=2^(N_bit-1)) = dataout(dataout>=2^(N_bit-1))-2^N_bit;
-
-
-
-
-    
-    
+end

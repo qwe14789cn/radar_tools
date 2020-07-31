@@ -23,3 +23,4 @@
 function [output] = auto_scale(sig,AD_len)
 sig = sig./max(abs(sig));
 output = round(sig .* (2^(AD_len-1)-1));
+end

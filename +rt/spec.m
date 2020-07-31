@@ -18,8 +18,8 @@
 %--------------------------------------------------------------------------
 function spec(sig,fs,Nfft,select)
 if nargin <=2
-     N2 = nextpow2(length(sig));
-     Nfft = 2^N2;
+    N2 = nextpow2(length(sig));
+    Nfft = 2^N2;
 end
 f1 = figure;
 f1.Position = [95 450 1671 494];
@@ -34,20 +34,20 @@ if isreal(sig)==1                                                           %ÊµÐ
     subplot(232);plot(pow2db(abs(A).^2));
     xlabel('µãÊý');ylabel('·ù¶È dB');grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÊµÐÅºÅ·ùÆµÏìÓ¦'])
-    
+
     subplot(234);plot(f,rad2deg(angle(A)));
     xlabel('ÆµÂÊ hz');ylabel('ÏàÎ» ¡ã');ylim([-180 180]);grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÊµÐÅºÅÏàÆµÏìÓ¦'])
-    
+
     subplot(235);plot(rad2deg(angle(A)));
     xlabel('µãÊý');ylabel('ÏàÎ» ¡ã');ylim([-180 180]);grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÊµÐÅºÅÏàÆµÏìÓ¦'])
-    
+
     subplot(133);
     plot3(1:length(A),real(A),imag(A));grid on
     xlabel('µãÊý');ylabel('Êµ²¿');zlabel('Ðé²¿')
     axis([0 length(A) -max(abs(A)) max(abs(A)) -max(abs(A)) max(abs(A))])
-    %----------------------------------------------------------------------    
+    %----------------------------------------------------------------------
     if nargin <=3                                                           %Èç¹û²»ÊäÈë ×Ô¶¯Ñ°ÕÒ×î´óÖµ
         select = find(A==max(A));
         ang = rad2deg(angle(A(select)));
@@ -67,15 +67,15 @@ else                                                                        %¸´Ð
     subplot(232);plot(pow2db(abs(A).^2));
     xlabel('µãÊý');ylabel('·ù¶È dB');grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÐÅºÅ·ùÆµÏìÓ¦'])
-    
+
     subplot(234);plot(f,rad2deg(angle(A)));
     xlabel('ÆµÂÊ hz');ylabel('ÏàÎ» ¡ã');ylim([-180 180]);grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÊµÐÅºÅÏàÆµÏìÓ¦'])
-    
+
     subplot(235);plot(rad2deg(angle(A)));
     xlabel('µãÊý');ylabel('ÏàÎ» ¡ã');ylim([-180 180]);grid on
     title(['²ÉÑùËÙÂÊ' num2str(fs/1e6) ' Mhz ÊµÐÅºÅÏàÆµÏìÓ¦'])
-    
+
     subplot(133);
     plot3(1:length(A),real(A),imag(A));grid on
     xlabel('µãÊý');ylabel('Êµ²¿');zlabel('Ðé²¿');
@@ -85,7 +85,7 @@ else                                                                        %¸´Ð
         select = find(A==max(A));
         ang = rad2deg(angle(A(select)));
     end
-    
+
     if nargin ==4
         ang = rad2deg(angle(A(select)));
     end

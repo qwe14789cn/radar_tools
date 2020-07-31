@@ -7,12 +7,12 @@ disp("接收数据");
 TOTAL = package_size(2);
 Received = uint8(zeros(package_size(1),package_size(2)));
 while TOTAL
-    try    
+    try
         Rx=fread(t,t.BytesAvailable);flag = 1;
     catch
         flag = 0;
     end
-    
+
     if flag == 1
         Received(:,package_size(2)-TOTAL+1) = Rx;
         TOTAL = TOTAL-1;

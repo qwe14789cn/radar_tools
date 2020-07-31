@@ -14,7 +14,7 @@
 %   output:
 %           dataout                 output data
 %--------------------------------------------------------------------------
-%   Examples:   
+%   Examples:
 %   a = [1+2j,3+4j];
 %   rt.abs2db(a)
 %   ans =

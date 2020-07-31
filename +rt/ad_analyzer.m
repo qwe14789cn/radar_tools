@@ -65,6 +65,8 @@ grid on;
 xlabel(f_x);ylabel("dB")
 fprintf('信噪比SNR = %1.2f dB,',snr_db);
 fprintf('ENOB = %1.2f\n',ENOB);
+end
+
 
 
 

@@ -6,18 +6,18 @@
 %   坐标系描述
 %   阵列法线方向指向x轴正向，阵元分布阵列面按照y轴分布
 %   o 表示阵元
-%   ->x 表示法线指向   
+%   ->x 表示法线指向
 %   ->  表示子阵元天线方向图主轴指向
 %   各个区间表示目标指向角度
 %--------------------------------------------------------------------------
-%   
+%
 %                               | y
 %                               |
 %          [-90 -180]           |        [0 -90]
 %                               o  ->
 %                               o  ->
 %                               o  ->
-%   ------------------------------------------------------------> x  
+%   ------------------------------------------------------------> x
 %                               o  ->
 %                               o  ->
 %                               o  ->
@@ -72,7 +72,7 @@
 % shape = [0 0 0 0 0 0;-2.5 -1.5 -0.5 0.5 1.5 2.5;0 0 0 0 0 0];
 % lambda = 2;
 % w_angle = -20;
-% w = exp(-1i*2*pi/lambda*1*sind(w_angle)).^(0:5)'; 
+% w = exp(-1i*2*pi/lambda*1*sind(w_angle)).^(0:5)';
 % [theta,E] = array_pattern(shape,lambda,w);
 % figure(2)
 % plot(theta,pow2db(abs(E).^2));grid on;
@@ -123,8 +123,8 @@ for degree = -180:step:179                                                  %目
     for index = 1:length(array(1,:))                                        %子阵元循环
         A_sub_angle = circshift(sp,round(sub_angle(index)/step));
         E(point,index) = exp(-1j*k*norm(tgt - array(:,index))).*...
-                      w(index).*...
-                      A_sub_angle(point,2);
+                        w(index).*...
+                        A_sub_angle(point,2);
     end
     point = point + 1;
 end

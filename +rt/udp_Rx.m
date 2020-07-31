@@ -1,5 +1,5 @@
 function Received = udp_Rx(port,package_size)
-udpRx = dsp.UDPReceiver('MessageDataType','uint8'); 
+udpRx = dsp.UDPReceiver('MessageDataType','uint8');
 udpRx.LocalIPPort = port;
 udpRx.ReceiveBufferSize = 65536;
 udpRx.MaximumMessageLength = package_size(1);
