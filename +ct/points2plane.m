@@ -1,5 +1,5 @@
 %--------------------------------------------------------------------------
-%   最小二乘法从点集合求解平面方程
+%   鏈�灏忎簩涔樻硶浠庣偣闆嗗悎姹傝В骞抽潰鏂圭▼
 %--------------------------------------------------------------------------
 %   example:
 %   points =  [0   216   216     0     0;...
@@ -15,7 +15,7 @@ if size(points,1)==3
     end
 end
 if flag == 0
-    disp("点集不符合要求：3xN矩阵，行表示xyz坐标")
+    disp("鐐归泦涓嶇鍚堣姹傦細3xN鐭╅樀锛岃琛ㄧずxyz鍧愭爣")
     disp("------------------------------------")
     disp('x1 x2 x3 x4 x5 ...')
     disp('y1 y2 y3 y4 y5 ...')
@@ -28,5 +28,4 @@ mean_points = points-mean_XYZ;
 S = mean_points*mean_points';
 [D,~] = eig(S);a = D(1,1);b = D(2,1);c = D(3,1);
 d = -a*mean_XYZ(1) - b*mean_XYZ(2) - c*mean_XYZ(3);
-fprintf("plane function : %2.5fx + %2.5fy + %2.5fz + %2.5f = 0\n",[a b c d])
 end
