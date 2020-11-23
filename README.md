@@ -1,6 +1,7 @@
-# radar tools/TOF camera tools工具箱
+# radar tools/TOF camera tools/Optimization Tools工具箱
 雷达信号处理工具箱
 TOF camera 处理工具箱
+凸优化工具箱(自娱自乐，自己玩的)
 
 直接将 "+rt"文件夹放在目录下即可
 
@@ -82,5 +83,9 @@ ray_plane_intersection		计算射线与平面交点的距离与坐标
 
 undistortImage2 		与matlab的矫正函数一样
 
+ot工具箱
+===============================
+NM 		  单纯型优化算法，等价于matlab自带的fminsearch
 
+PSO		  粒子群优化算法，等价于matlab自带的particleswarm
 
