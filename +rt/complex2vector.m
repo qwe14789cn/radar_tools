@@ -1,21 +1,7 @@
 %--------------------------------------------------------------------------
-%   rt toolbox
-%   author:qwe14789cn@gmail.com
-%   https://github.com/qwe14789cn/radar_tools
-%--------------------------------------------------------------------------
-%   complex2vector(points,model)
-%--------------------------------------------------------------------------
-%   Description:
-%   show complex vectror in 2D or 3D
-%--------------------------------------------------------------------------
-%   input:
-%           points         杈撳叆淇″彿
-%           model         1 2D妯″紡/2 3D妯″紡
-%--------------------------------------------------------------------------
-%   Examples:
-%   complex2vector(randn(1,3)+1j.*randn(1,3))
-%   complex2vector(randn(1,3)+1j.*randn(1,3),1)
-%   complex2vector(randn(1,3)+1j.*randn(1,3),2)
+%   复数可视化
+%	example:
+%	complex2vector(randn(1,3) + 1j.*randn(1,3))
 %--------------------------------------------------------------------------
 function complex2vector(points,model)
 if nargin == 1
@@ -27,10 +13,11 @@ if nargin == 1
     hold off
 else
     for idx = 1:numel(points)
-        quiver3(idx,0,0,0,real(points(idx)),imag(points(idx)));
+        quiver3(idx,0,0,   0,real(points(idx)),imag(points(idx)));
         text(idx,real(points(idx)),imag(points(idx)),num2str(idx));
         hold on
     end
-    plot3(1:numel(points),zeros(1,numel(points)),zeros(1,numel(points)),'k','LineWidth',1);
-    plot3(1:numel(points),zeros(1,numel(points)),zeros(1,numel(points)),'ro','LineWidth',1);
+    plot3(1:numel(points),zeros(1,numel(points)),zeros(1,numel(points)),'k','LineWidth',1)
+    plot3(1:numel(points),zeros(1,numel(points)),zeros(1,numel(points)),'ro','LineWidth',1)
+    hold off
 end
