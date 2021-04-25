@@ -56,6 +56,7 @@
 % shape = [0 0 0 0;-1.5 -0.5 0.5 1.5;0 0 0 0];
 % lambda = 2;
 % [theta,E] = array_pattern(shape,lambda);
+% E = sum(E,2);
 % figure(1)
 % plot(theta,pow2db(abs(E).^2));grid on;
 %--------------------------------------------------------------------------
