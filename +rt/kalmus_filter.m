@@ -13,5 +13,4 @@ fc = linspace(-0.5,0.5,N);
 H1 = sin( pi*order*(fc - 1/2/order) ) ./ (pi*(fc - 1/2/order));
 H2 = sin( pi*order*(fc + 1/2/order) ) ./ (pi*(fc + 1/2/order));
 H =abs(H1-H2)';
-H = H./max(H);
 end
